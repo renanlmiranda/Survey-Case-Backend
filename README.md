@@ -11,7 +11,7 @@
 - yarn or yarn install
 - yarn start
 
-# Create postgres database:
+# Create database container (postgres):
 
 - docker run --name ${imageName} -e POSTGRES_PASSWORD=${password} -p 5432:5432 -d postgres
 
