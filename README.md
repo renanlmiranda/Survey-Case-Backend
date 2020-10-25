@@ -13,7 +13,7 @@
 
 # Create postgres database:
 
-- docker run --name ${imageName} -e POSTGRES_PASSWORD= ${password} -p 5432:5432 -d postgres
+- docker run --name ${imageName} -e POSTGRES_PASSWORD=${password} -p 5432:5432 -d postgres
 
 # Start Container:
 
@@ -23,4 +23,8 @@
 
 # Check if worked: 
 
-docker ps
+- docker ps
+
+# Create db:
+
+- yarn sequelize db:create
