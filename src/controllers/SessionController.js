@@ -1,5 +1,7 @@
 const User = require('../models/User');
 const { compare } = require('bcryptjs');
+const { sign } = require('jsonwebtoken');
+require('dotenv').config();
 
 module.exports = {
   async create(req, res) {
@@ -17,8 +19,18 @@ module.exports = {
       if(!pwdCompare) {
         throw new Error('Incorrect email/password combination');
       }
+
+      // const { secret, expiresIn } = authConfig.jwt;
+      const token = sign(
+        {}, 
+        process.env.JWT_SECRET,
+        { 
+          subject: user.id,
+          expiresIn: '1d',
+        }
+      );
   
-      return res.json(user);
+      return res.json({ user, token });
     }catch (err) {
       return res.status(400).json({error: err.message});
     }
